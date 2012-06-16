@@ -7,7 +7,14 @@ class MoviesController < ApplicationController
   end
 
   def index
-    @movies = Movie.all
+    sort = params[:sort_column]
+    direction = params[:direction]
+    puts("sort direction = #{sort} #{direction}")
+    if sort
+        @movies = Movie.order("#{sort} #{direction}")
+    else
+     @movies = Movie.all
+    end
   end
 
   def new
